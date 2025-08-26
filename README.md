@@ -496,9 +496,11 @@ components:
         - schema:
             - description: schema name
             - type: string
+            - example: payment_schema
         - version:
             - description: selected version
             - type: integer
+            - example: 2
     - Response:
         ```
         {
@@ -517,6 +519,7 @@ components:
         - schema:
             - description: schema name
             - type: string
+            - example: payment_schema
     - Response:
         ```
         {
@@ -534,6 +537,7 @@ components:
         - schema:
             - description: schema name
             - type: string
+            - example: payment_schema
     - Response:
         ```
         {
@@ -598,4 +602,3 @@ The schema validation will be based on the validation tag in the struct.
 There are several things that can be improved:
 1. Authentication/authorization
 2. Logging and metric
-3. Containerization for scalability
