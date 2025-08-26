@@ -21,11 +21,12 @@ Make sure your environment has Go installed. If you haven't installed Go in your
     ```
 
 2. **Build** the binary
-    ```
-    make build
-    ```
+    - Using **Makefile**
+        ```
+        make build
+        ```
     or
-    - **Linux**
+    - **Linux/MAC**
       ```
       go build -o config-management-service main.go
       ```
@@ -35,33 +36,38 @@ Make sure your environment has Go installed. If you haven't installed Go in your
       ```
 
 3. **Run** the binary
-   ```
-   make run
-   ```
-   or
-    - **Linux**
-      ```
-      ./config-management-service
-      ```
+
+    This application will be run with port **3001**
+    - Using **Makefile**
+        ```
+        make run
+        ```
+    or
+    - **Linux/MAC**
+        ```
+        ./config-management-service
+        ```
     - **Windows**
-      ```
-      config-management-service.exe 
-      ```
+        ```
+        config-management-service.exe 
+        ```
 
 4. **Optional**: Running without create binary
-   ```
-   go run main.go
-   ```
+    ```
+    go run main.go
+    ```
 
 
 5. Run unit testing
-   ```
-   make test
-   ```
-   or
-   ```
-   go test ./test
-   ```
+
+    Using **Makefile**
+    ```
+    make test
+    ```
+    or
+    ```
+    go test ./test
+    ```
 
 ## API Documentation
 
