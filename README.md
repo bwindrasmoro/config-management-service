@@ -10,7 +10,7 @@ A Go-based service to manage application configurations with validation, version
 ## Installation
 ### Prerequisite
 - Go 1.21+
-- Makefile
+- Makefile (Optional)
 
 ### How to Build and Run
 Make sure your environment has Go installed. If you haven't installed Go in your environment, then you should [install Go](https://go.dev/doc/install) first.
@@ -598,3 +598,4 @@ The schema validation will be based on the validation tag in the struct.
 There are several things that can be improved:
 1. Authentication/authorization
 2. Logging and metric
+3. Containerization for scalability
