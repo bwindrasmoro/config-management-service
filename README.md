@@ -64,7 +64,9 @@ Make sure your environment has Go installed. If you haven't installed Go in your
    ```
 
 ## API Documentation
-### OpenAPI Spec
+
+<details>
+<summary>OpenAPI Spec</summary>
 
 ```yaml
 openapi: 3.0.3
@@ -431,6 +433,7 @@ components:
           example: "field_name"
 
 ```
+</details>
 
 ### Endpoint, Request and Response
 
@@ -461,7 +464,131 @@ components:
         }
         ```
 - **POST /:schema**
+    - Description: Update existing config
+    - Request:
+        ```
+        {
+            "max_limit": 2000,
+            "enabled": true
+        }
+        ```
+    - Response:
+        ```
+        {
+            "status": "Success",
+            "data": {
+                "max_limit": 2000,
+                "enabled": true
+            },
+            "version": 2,
+            "message": "payment_config sucessfully updated"
+        }
+        ```
 - **POST /:schema/rollback/:version**
+    - Description: Rollback to previous version
+    - Parameters:
+        - schema:
+            - description: schema name
+            - type: string
+        - version:
+            - description: selected version
+            - type: integer
+    - Response:
+        ```
+        {
+            "status": "Success",
+            "data": {
+                "max_limit": 2000,
+                "enabled": true
+            },
+            "version": 5,
+            "message": "payment_config sucessfully updated"
+        }
+        ```
 - **GET /:schema**
+    - Description: Retrieve latest config of the schema
+    - Parameters:
+        - schema:
+            - description: schema name
+            - type: string
+    - Response:
+        ```
+        {
+            "status": "Success",
+            "data": {
+                "max_limit": 4000,
+                "enabled": true
+            },
+            "version": 4
+        }
+        ```
 - **GET /:schema/versions**
+    - Description: Retrieve latest config of the schema
+    - Parameters:
+        - schema:
+            - description: schema name
+            - type: string
+    - Response:
+        ```
+        {
+            "status": "Success",
+            "data": [
+                {
+                    "config": {
+                        "enabled": true,
+                        "max_limit": 1000
+                    },
+                    "version": 1
+                },
+                {
+                    "config": {
+                        "max_limit": 2000,
+                        "enabled": true
+                    },
+                    "version": 2
+                },
+                {
+                    "config": {
+                        "max_limit": 3000,
+                        "enabled": true
+                    },
+                    "version": 3
+                },
+                {
+                    "config": {
+                        "max_limit": 4000,
+                        "enabled": true
+                    },
+                    "version": 4
+                },
+                {
+                    "config": {
+                        "max_limit": 2000,
+                        "enabled": true
+                    },
+                    "version": 5
+                }
+            ]
+        }
+        ```
 
+## Schema Explanation
+The schema must be declared using go struct, here is the example:
+```go
+type PaymentConfig struct {
+	MaxLimit int  `json:"max_limit" validation:"required"`
+	Enabled  bool `json:"enabled" validation:"required"`
+}
+```
+
+The schema validation will be based on the validation tag in the struct. 
+
+* **Required** tag means that the field is required, unable to provide data to this field will return status code 400 with a list of variable that must be filled
+
+* Unable to provide data with respected type will return status code 400 with message Invalid request body or Invalid config data
+
+
+## Improvement
+There are several things that can be improved:
+1. Authentication/authorization
+2. Logging and metric
