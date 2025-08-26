@@ -11,7 +11,7 @@ ifeq ($(OS),windows)
 
 	CHECK_N_RUN_CMD := if exist $(BINARY_NAME) ($(RUN_CMD)) else (echo Binary not found, please execute 'make build' to build the binary.)
 else
-	CLEAN_CMD := [ -f $(BINARY_NAME) ] && echo Binary found, deleting... && rm $(BINARY_NAME)
+	CLEAN_CMD := [ -f $(BINARY_NAME) ] && echo Binary found, deleting... && rm $(BINARY_NAME) || true
 
 	CHECK_N_RUN_CMD := [ -f $(BINARY_NAME) ] && $(RUN_CMD) || echo Binary not found, please execute 'make build' to build the binary.
 endif
@@ -30,5 +30,6 @@ run:
 	@$(CHECK_N_RUN_CMD)
 
 test:
-	go test ./test
+	@echo Running test...
+	@go test ./test
 	
